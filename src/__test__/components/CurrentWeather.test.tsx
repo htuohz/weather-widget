@@ -9,6 +9,11 @@ describe("CurrentWeather component rendered correctly", () => {
         currentWeather=""
         currentTemprature={15}
         isMetric={true}
+        chanceOfRain={0.01}
+        windDegree={10}
+        windSpeed={10}
+        pollenCount={20}
+        humidity={0.05}
       />
     );
     const city = screen.getByRole("heading", { name: /sydney/i });
@@ -22,6 +27,11 @@ describe("CurrentWeather component rendered correctly", () => {
         currentWeather=""
         currentTemprature={15}
         isMetric={true}
+        chanceOfRain={0.01}
+        windDegree={10}
+        windSpeed={10}
+        pollenCount={20}
+        humidity={0.05}
       />
     );
     const dateString = new Date().toLocaleDateString("en-AU");
@@ -36,6 +46,11 @@ describe("CurrentWeather component rendered correctly", () => {
         currentWeather="overcast"
         currentTemprature={15}
         isMetric={true}
+        chanceOfRain={0.01}
+        windDegree={10}
+        windSpeed={10}
+        pollenCount={20}
+        humidity={0.05}
       />
     );
     const weatherText = screen.getByRole("heading", { name: "overcast" });
@@ -51,6 +66,11 @@ describe("CurrentWeather component rendered correctly", () => {
         currentWeather="overcast"
         currentTemprature={15}
         isMetric={true}
+        chanceOfRain={0.01}
+        windDegree={10}
+        windSpeed={10}
+        pollenCount={20}
+        humidity={0.05}
       />
     );
     const temp = screen.getByRole("heading", { name: "15°C" });

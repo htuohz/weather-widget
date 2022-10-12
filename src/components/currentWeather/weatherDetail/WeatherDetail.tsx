@@ -1,7 +1,7 @@
 import React from "react";
-import { degToCompass } from "../../utilities";
+import { degToCompass } from "../../../utilities";
 
-type WeatherDetailProps = {
+export type WeatherDetailProps = {
   chanceOfRain: number;
   humidity: number;
   windSpeed: number;
