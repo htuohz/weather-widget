@@ -38,9 +38,10 @@ describe("CurrentWeather component rendered correctly", () => {
         isMetric={true}
       />
     );
-    const dateString = new Date().toLocaleDateString("en-AU");
-    const dateText = screen.getByRole("heading", { name: dateString });
-    expect(dateText).toBeInTheDocument();
+    const weatherText = screen.getByRole("heading", { name: "overcast" });
+    expect(weatherText).toBeInTheDocument();
+    const weatherIcon = screen.getByRole("img", { name: "overcast" });
+    expect(weatherIcon).toBeInTheDocument();
   });
 
   it("Current temprature is rendered", () => {
