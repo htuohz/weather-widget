@@ -1,5 +1,5 @@
 import { getByRole, render, screen } from "@testing-library/react";
-import WeatherDetail from "./WeatherDetail";
+import WeatherDetail from "../../components/weatherDetail/WeatherDetail";
 
 describe("weather detail component renders correctly", () => {
   it("should render precipitation, wind, pollen count and humidity", () => {

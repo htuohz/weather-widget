@@ -1,4 +1,5 @@
 import React from "react";
+import { degToCompass } from "../../utilities";
 
 type WeatherDetailProps = {
   chanceOfRain: number;
@@ -6,29 +7,6 @@ type WeatherDetailProps = {
   windSpeed: number;
   windDegree: number;
   pollenCount: number;
-};
-
-const degToCompass = (degree: number) => {
-  const val = Math.floor(degree / 22.5 + 0.5);
-  const arr = [
-    "N",
-    "NNE",
-    "NE",
-    "ENE",
-    "E",
-    "ESE",
-    "SE",
-    "SSE",
-    "S",
-    "SSW",
-    "SW",
-    "WSW",
-    "W",
-    "WNW",
-    "NW",
-    "NNW",
-  ];
-  return arr[val % 16];
 };
 
 export default function WeatherDetail({

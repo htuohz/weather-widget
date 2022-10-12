@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import CurrentWeather from "./CurrentWeather";
+import CurrentWeather from "../../components/currentWeather/CurrentWeather";
 
 describe("CurrentWeather component rendered correctly", () => {
   it("City name is rendered", () => {
