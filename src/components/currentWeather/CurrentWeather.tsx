@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../store/hooks";
 import Temprature from "./temprature/Temprature";
-import WeatherDetail, {
-  WeatherDetailProps,
-} from "./weatherDetail/WeatherDetail";
+import WeatherDetail from "./weatherDetail/WeatherDetail";
 import WeatherIcon from "./weatherIcon/WeatherIcon";
 
 export type CurrentWeatherProps = {
@@ -13,17 +12,9 @@ export type CurrentWeatherProps = {
   isMetric: boolean;
 };
 
-export default function CurrentWeather({
-  currentCity,
-  currentWeather,
-  currentTemprature,
-  isMetric,
-  chanceOfRain,
-  windDegree,
-  windSpeed,
-  humidity,
-  pollenCount,
-}: CurrentWeatherProps & WeatherDetailProps) {
+export default function CurrentWeather() {
+  const { currentCity, currentWeather, currentTemprature, isMetric } =
+    useAppSelector((rootStore) => rootStore.currentWeather);
   return (
     <CurrentWeatherWrapper>
       <h2>{currentCity}</h2>
@@ -32,13 +23,7 @@ export default function CurrentWeather({
       <WeatherDetailWrapper>
         <WeatherIcon weatherName={currentWeather} />
         <Temprature temprature={currentTemprature} isMetric={isMetric} />
-        <WeatherDetail
-          chanceOfRain={chanceOfRain}
-          windDegree={windDegree}
-          windSpeed={windSpeed}
-          humidity={humidity}
-          pollenCount={pollenCount}
-        />
+        <WeatherDetail />
       </WeatherDetailWrapper>
     </CurrentWeatherWrapper>
   );
@@ -57,9 +42,5 @@ const WeatherDetailWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  h4 {
-    margin-top: 0;
-    flex: 4;
-    text-align: start;
-  }
+  gap: 20px;
 `;

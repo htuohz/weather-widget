@@ -9,19 +9,10 @@ import {
 } from "./store/reducers/currentWeatherSlice";
 import weatherApi from "./api/weather";
 import styled from "styled-components";
+import UnitSwitcher from "./components/unitSwitcher/UnitSwitcher";
 
 function App() {
-  const {
-    currentCity,
-    currentTemprature,
-    currentWeather,
-    windDegree,
-    windSpeed,
-    chanceOfRain,
-    isMetric,
-    pollenCount,
-    humidity,
-  } = useAppSelector((rootstate) => rootstate.currentWeather);
+  const { isMetric } = useAppSelector((rootstate) => rootstate.currentWeather);
   const dispatch = useAppDispatch();
   const [currentCoords, setCurrentCoords] = useState({
     lat: -42.880554,
@@ -53,6 +44,8 @@ function App() {
     // getCurrentCityByCoords(currentCoords)
     //   .then((res) => dispatch(setCurrentCity(res.data[0].name)))
     //   .catch((err) => console.log(err));
+  }, [currentCoords, dispatch]);
+  useEffect(() => {
     // getCurrentWeather(currentCoords, isMetric)
     //   .then((res) => {
     //     dispatch(setCurrentWeather(res.data));
@@ -62,17 +55,8 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <CurrentWeather
-          currentCity={currentCity}
-          chanceOfRain={chanceOfRain}
-          currentTemprature={currentTemprature}
-          windDegree={windDegree}
-          windSpeed={windSpeed}
-          isMetric={isMetric}
-          currentWeather={currentWeather}
-          pollenCount={pollenCount}
-          humidity={humidity}
-        />
+        <UnitSwitcher />
+        <CurrentWeather />
       </Container>
     </div>
   );

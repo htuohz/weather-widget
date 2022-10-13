@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../../store/hooks";
 import { degToCompass } from "../../../utilities";
 
 export type WeatherDetailProps = {
@@ -10,18 +11,22 @@ export type WeatherDetailProps = {
   pollenCount: number;
 };
 
-export default function WeatherDetail({
-  chanceOfRain,
-  humidity,
-  windSpeed,
-  windDegree,
-  pollenCount,
-}: WeatherDetailProps) {
+export default function WeatherDetail() {
+  const {
+    isMetric,
+    chanceOfRain,
+    humidity,
+    windSpeed,
+    windDegree,
+    pollenCount,
+  } = useAppSelector((rootStore) => rootStore.currentWeather);
   return (
     <WeatherDetailWrapper>
       <p>{`Precipitation ${chanceOfRain * 100}%`}</p>
       <p>{`Humidity ${humidity}%`}</p>
-      <p>{`Wind ${windSpeed}kph ${degToCompass(windDegree)}`}</p>
+      <p>{`Wind ${isMetric ? (windSpeed * 3.6).toFixed(2) : windSpeed}${
+        isMetric ? "kph" : "mph"
+      } ${degToCompass(windDegree)}`}</p>
       <p>{`Pollen count ${pollenCount}`}</p>
     </WeatherDetailWrapper>
   );
@@ -30,4 +35,7 @@ export default function WeatherDetail({
 const WeatherDetailWrapper = styled.div`
   flex: 4;
   text-align: start;
+  p {
+    margin: 5px;
+  }
 `;
