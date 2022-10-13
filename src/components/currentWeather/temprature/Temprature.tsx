@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 type TempratureProps = {
   temprature: number;
@@ -6,5 +7,13 @@ type TempratureProps = {
 };
 
 export default function Temprature({ temprature, isMetric }: TempratureProps) {
-  return <h4>{`${temprature}°${isMetric ? "C" : "F"}`}</h4>;
+  return (
+    <StyledHeading>{`${temprature}°${isMetric ? "C" : "F"}`}</StyledHeading>
+  );
 }
+
+const StyledHeading = styled.h3`
+  margin-top: 0;
+  flex: 4;
+  text-align: start;
+`;

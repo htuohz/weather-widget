@@ -1,11 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 import Temprature from "./temprature/Temprature";
 import WeatherDetail, {
   WeatherDetailProps,
 } from "./weatherDetail/WeatherDetail";
 import WeatherIcon from "./weatherIcon/WeatherIcon";
 
-type CurrentWeatherProps = {
+export type CurrentWeatherProps = {
   currentCity: string;
   currentWeather: string;
   currentTemprature: number;
@@ -24,11 +25,11 @@ export default function CurrentWeather({
   pollenCount,
 }: CurrentWeatherProps & WeatherDetailProps) {
   return (
-    <div>
+    <CurrentWeatherWrapper>
       <h2>{currentCity}</h2>
-      <h4>{new Date().toLocaleDateString("en-AU")}</h4>
-      <h4>{currentWeather}</h4>
-      <div>
+      <p>{new Date().toLocaleDateString("en-AU")}</p>
+      <p>{currentWeather}</p>
+      <WeatherDetailWrapper>
         <WeatherIcon weatherName={currentWeather} />
         <Temprature temprature={currentTemprature} isMetric={isMetric} />
         <WeatherDetail
@@ -38,7 +39,27 @@ export default function CurrentWeather({
           humidity={humidity}
           pollenCount={pollenCount}
         />
-      </div>
-    </div>
+      </WeatherDetailWrapper>
+    </CurrentWeatherWrapper>
   );
 }
+
+const CurrentWeatherWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  h2 {
+    margin: 0;
+  }
+`;
+
+const WeatherDetailWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  h4 {
+    margin-top: 0;
+    flex: 4;
+    text-align: start;
+  }
+`;
