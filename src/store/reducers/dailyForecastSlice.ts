@@ -17,7 +17,14 @@ export const dailyForecastSlice = createSlice({
   initialState,
   reducers: {
     setDailyWeather: (state, action) => {
-      state = action.payload;
+      action.payload.pop();
+      return action.payload.map((item: any) => ({
+        weatherName: item.weather[0].main,
+        iconId: item.weather[0].icon,
+        maxTemprature: item.temp.max,
+        minTemprature: item.temp.min,
+        date: new Date(item.dt * 1000),
+      }));
     },
   },
 });
