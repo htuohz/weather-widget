@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import type { AppStore, RootState } from "../store/store";
 // As a basic setup, import your same slice reducers
 import currentWeatherReducer from "../store/reducers/currentWeatherSlice";
+import dailyForecastReducer from "../store/reducers/dailyForecastSlice";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -30,11 +31,66 @@ export function renderWithProviders(
         windSpeed: 0,
         humidity: 0,
         pollenCount: 0,
+        iconId: "",
       },
+      dailyForecast: [
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+        {
+          weatherName: "overcast",
+          iconId: "d10",
+          maxTemprature: 20,
+          minTemprature: 10,
+          date: new Date(),
+        },
+      ],
     },
     // Automatically create a store instance if no store was passed in
     store = configureStore({
-      reducer: { currentWeather: currentWeatherReducer },
+      reducer: {
+        currentWeather: currentWeatherReducer,
+        dailyForecast: dailyForecastReducer,
+      },
       preloadedState,
     }),
     ...renderOptions

@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import WeatherItem from "../../components/dailyForecast/weatherItem/WeatherItem";
+import { renderWithProviders } from "../test-utils";
 
 describe("should render weather item component correctly", () => {
   it("should render today if the datetime passed is today", () => {
-    render(
+    renderWithProviders(
       <WeatherItem
         date={new Date()}
         weatherName="overcast"
@@ -22,7 +23,7 @@ describe("should render weather item component correctly", () => {
     const nextFriday = new Date(
       today.setDate(today.getDate() + ((7 - today.getDay() + 5) % 7 || 7))
     );
-    render(
+    renderWithProviders(
       <WeatherItem
         weatherName="overcast"
         date={nextFriday}
@@ -36,7 +37,7 @@ describe("should render weather item component correctly", () => {
   });
 
   it("should render max and min temprature", () => {
-    render(
+    renderWithProviders(
       <WeatherItem
         date={new Date()}
         weatherName="overcast"
@@ -45,14 +46,14 @@ describe("should render weather item component correctly", () => {
         iconId={"d10"}
       />
     );
-    const max = screen.getByText("50°");
+    const max = screen.getByText(/50°/i);
     expect(max).toBeInTheDocument();
-    const min = screen.getByText("10°");
+    const min = screen.getByText(/10°/i);
     expect(min).toBeInTheDocument();
   });
 
   it("should render weather icon", () => {
-    render(
+    renderWithProviders(
       <WeatherItem
         date={new Date()}
         weatherName="overcast"
