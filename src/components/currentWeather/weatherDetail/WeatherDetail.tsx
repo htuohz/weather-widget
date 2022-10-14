@@ -24,9 +24,9 @@ export default function WeatherDetail() {
     <WeatherDetailWrapper>
       <p>{`Precipitation ${chanceOfRain * 100}%`}</p>
       <p>{`Humidity ${humidity}%`}</p>
-      <p>{`Wind ${isMetric ? (windSpeed * 3.6).toFixed(2) : windSpeed}${
-        isMetric ? "kph" : "mph"
-      } ${degToCompass(windDegree)}`}</p>
+      <p>{`Wind ${
+        isMetric ? Math.floor(windSpeed * 3.6) : Math.floor(windSpeed)
+      }${isMetric ? "kph" : "mph"} ${degToCompass(windDegree)}`}</p>
       <p>{`Pollen count ${pollenCount}`}</p>
     </WeatherDetailWrapper>
   );

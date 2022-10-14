@@ -5,14 +5,15 @@ import {
   selectDailyForecast,
 } from "../../store/reducers/dailyForecastSlice";
 import WeatherItem from "./weatherItem/WeatherItem";
+import styled from "styled-components";
 
 export default function DailyForecast() {
   const weatherArray = useAppSelector(selectDailyForecast);
   if (weatherArray.length < 1) {
-    throw Error("No daily weather returned");
+    return <></>;
   }
   return (
-    <div>
+    <DailyWeatherContaienr>
       {weatherArray.map((item: IDailyWeather) => (
         <WeatherItem
           date={item.date}
@@ -22,6 +23,12 @@ export default function DailyForecast() {
           weatherName={item.weatherName}
         />
       ))}
-    </div>
+    </DailyWeatherContaienr>
   );
 }
+
+const DailyWeatherContaienr = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;

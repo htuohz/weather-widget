@@ -8,7 +8,9 @@ type TempratureProps = {
 
 export default function Temprature({ temprature, isMetric }: TempratureProps) {
   return (
-    <StyledHeading>{`${temprature}°${isMetric ? "C" : "F"}`}</StyledHeading>
+    <StyledHeading>{`${Math.floor(temprature)}°${
+      isMetric ? "C" : "F"
+    }`}</StyledHeading>
   );
 }
 

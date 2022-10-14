@@ -1,4 +1,7 @@
 import React from "react";
+import styled from "styled-components";
+import { useAppSelector } from "../../../store/hooks";
+import { selectCurrentWeather } from "../../../store/reducers/currentWeatherSlice";
 import { indexToDay } from "../../../utilities";
 import WeatherIcon from "../../currentWeather/weatherIcon/WeatherIcon";
 
@@ -17,6 +20,7 @@ export default function WeatherItem({
   iconId,
   weatherName,
 }: WeatherItemProps) {
+  const { isMetric } = useAppSelector(selectCurrentWeather);
   return (
     <div>
       <h4>
@@ -26,8 +30,8 @@ export default function WeatherItem({
       </h4>
       <WeatherIcon weatherName={weatherName} iconId={iconId} />
       <div>
-        <span>{`${max}°`}</span>
-        <span>{`${min}°`}</span>
+        <span>{`${Math.floor(max)}°${isMetric ? "C" : "F"} `}</span>
+        <span>{`${Math.floor(min)}°${isMetric ? "C" : "F"}`}</span>
       </div>
     </div>
   );

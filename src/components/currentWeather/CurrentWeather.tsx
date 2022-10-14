@@ -13,7 +13,7 @@ export type CurrentWeatherProps = {
 };
 
 export default function CurrentWeather() {
-  const { currentCity, currentWeather, currentTemprature, isMetric } =
+  const { currentCity, currentWeather, currentTemprature, isMetric, iconId } =
     useAppSelector((rootStore) => rootStore.currentWeather);
   return (
     <CurrentWeatherWrapper>
@@ -21,7 +21,7 @@ export default function CurrentWeather() {
       <p>{new Date().toLocaleDateString("en-AU")}</p>
       <p>{currentWeather}</p>
       <WeatherDetailWrapper>
-        <WeatherIcon weatherName={currentWeather} />
+        <WeatherIcon weatherName={currentWeather} iconId={iconId} />
         <Temprature temprature={currentTemprature} isMetric={isMetric} />
         <WeatherDetail />
       </WeatherDetailWrapper>

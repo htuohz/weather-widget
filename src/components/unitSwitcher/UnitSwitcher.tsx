@@ -14,17 +14,25 @@ export default function UnitSwitcher() {
         name="switch-one"
         value="yes"
         checked={isMetric}
+        aria-checked={isMetric}
+        aria-labelledby="metric-label"
         onChange={(event) => dispatch(setMetric(event.target.checked))}
       />
-      <label htmlFor="metric">Metric</label>
+      <label htmlFor="metric" id="metric-label">
+        Metric: °C, kph
+      </label>
       <input
         type="radio"
         id="imperial"
         name="switch-one"
         value="no"
+        aria-checked={!isMetric}
+        aria-labelledby="imperial-label"
         onChange={(event) => dispatch(setMetric(!event.target.checked))}
       />
-      <label htmlFor="imperial">Imperial</label>
+      <label htmlFor="imperial" id="imperial-label">
+        Imperial: °F, mph
+      </label>
     </SwitchContainer>
   );
 }
