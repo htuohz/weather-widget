@@ -20,3 +20,19 @@ export function degToCompass(degree: number) {
   ];
   return arr[val % 16];
 }
+
+export function indexToDay(index: number) {
+  const dayArray = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  if (!dayArray[index]) {
+    throw Error("Invalid day index provided");
+  }
+  return dayArray[index];
+}
