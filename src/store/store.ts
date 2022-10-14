@@ -4,9 +4,11 @@ import {
   PreloadedState,
 } from "@reduxjs/toolkit";
 import currentWeatherReducer from "../store/reducers/currentWeatherSlice";
+import dailyForecastReducer from "../store/reducers/dailyForecastSlice";
 // Create the root reducer independently to obtain the RootState type
 const rootReducer = combineReducers({
   currentWeather: currentWeatherReducer,
+  dailyForecast: dailyForecastReducer,
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
