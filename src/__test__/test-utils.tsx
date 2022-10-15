@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import type { AppStore, RootState } from "../store/store";
 // As a basic setup, import your same slice reducers
 import currentWeatherReducer from "../store/reducers/currentWeatherSlice";
-import dailyForecastReducer from "../store/reducers/dailyForecastSlice";
+import citySuggestionsReducer from "../store/reducers/citySuggestionsSlice";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -32,64 +32,72 @@ export function renderWithProviders(
         humidity: 0,
         pollenCount: 0,
         iconId: "",
+        dailyForecast: [
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+          {
+            weatherName: "overcast",
+            iconId: "d10",
+            maxTemprature: 20,
+            minTemprature: 10,
+            date: new Date(),
+          },
+        ],
       },
-      dailyForecast: [
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
-        {
-          weatherName: "overcast",
-          iconId: "d10",
-          maxTemprature: 20,
-          minTemprature: 10,
-          date: new Date(),
-        },
+
+      citySuggestions: [
+        { cityName: "London", lat: 42.9834, lon: -81.233, country: "GB" },
+        { cityName: "London", lat: 42.9834, lon: -81.233, country: "GB" },
+        { cityName: "London", lat: 42.9834, lon: -81.233, country: "GB" },
+        { cityName: "London", lat: 42.9834, lon: -81.233, country: "GB" },
+        { cityName: "London", lat: 42.9834, lon: -81.233, country: "GB" },
       ],
     },
     // Automatically create a store instance if no store was passed in
     store = configureStore({
       reducer: {
         currentWeather: currentWeatherReducer,
-        dailyForecast: dailyForecastReducer,
+        citySuggestions: citySuggestionsReducer,
       },
       preloadedState,
     }),

@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { useAppSelector } from "../../../store/hooks";
 import { selectCurrentWeather } from "../../../store/reducers/currentWeatherSlice";
 import { indexToDay } from "../../../utilities";

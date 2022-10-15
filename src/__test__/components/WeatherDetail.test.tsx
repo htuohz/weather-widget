@@ -3,7 +3,7 @@ import WeatherDetail from "../../components/currentWeather/weatherDetail/Weather
 import { renderWithProviders } from "../test-utils";
 
 describe("weather detail component renders correctly", () => {
-  it("should render precipitation, wind, pollen count and humidity", () => {
+  it("should render precipitation, wind,  and humidity", () => {
     renderWithProviders(<WeatherDetail />);
     const precipitation = screen.getByText(/precipitation/i);
     expect(precipitation).toHaveTextContent("0%");
@@ -11,7 +11,5 @@ describe("weather detail component renders correctly", () => {
     expect(humidty).toHaveTextContent("0%");
     const wind = screen.getByText(/wind/i);
     expect(wind).toHaveTextContent(/0kph n/i);
-    const pollenCount = screen.getByText(/pollen/i);
-    expect(pollenCount).toHaveTextContent("0");
   });
 });

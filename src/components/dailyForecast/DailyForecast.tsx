@@ -1,20 +1,21 @@
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
-import {
-  IDailyWeather,
-  selectDailyForecast,
-} from "../../store/reducers/dailyForecastSlice";
 import WeatherItem from "./weatherItem/WeatherItem";
 import styled from "styled-components";
+import {
+  IDailyWeather,
+  selectCurrentWeather,
+} from "../../store/reducers/currentWeatherSlice";
+import AlertBanner from "../alertBanner/AlertBanner";
 
 export default function DailyForecast() {
-  const weatherArray = useAppSelector(selectDailyForecast);
-  if (weatherArray.length < 1) {
-    return <></>;
+  const { dailyForecast } = useAppSelector(selectCurrentWeather);
+  if (dailyForecast.length < 1) {
+    return <AlertBanner message="No daily data returned" />;
   }
   return (
     <DailyWeatherContaienr>
-      {weatherArray.map((item: IDailyWeather) => (
+      {dailyForecast.map((item: IDailyWeather) => (
         <WeatherItem
           date={item.date}
           max={item.maxTemprature}

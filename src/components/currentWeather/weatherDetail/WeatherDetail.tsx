@@ -12,22 +12,15 @@ export type WeatherDetailProps = {
 };
 
 export default function WeatherDetail() {
-  const {
-    isMetric,
-    chanceOfRain,
-    humidity,
-    windSpeed,
-    windDegree,
-    pollenCount,
-  } = useAppSelector((rootStore) => rootStore.currentWeather);
+  const { isMetric, chanceOfRain, humidity, windSpeed, windDegree } =
+    useAppSelector((rootStore) => rootStore.currentWeather);
   return (
     <WeatherDetailWrapper>
-      <p>{`Precipitation ${chanceOfRain * 100}%`}</p>
+      <p>{`Precipitation ${Math.floor(chanceOfRain * 100)}%`}</p>
       <p>{`Humidity ${humidity}%`}</p>
       <p>{`Wind ${
         isMetric ? Math.floor(windSpeed * 3.6) : Math.floor(windSpeed)
       }${isMetric ? "kph" : "mph"} ${degToCompass(windDegree)}`}</p>
-      <p>{`Pollen count ${pollenCount}`}</p>
     </WeatherDetailWrapper>
   );
 }

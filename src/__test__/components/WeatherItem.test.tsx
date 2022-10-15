@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import WeatherItem from "../../components/dailyForecast/weatherItem/WeatherItem";
 import { renderWithProviders } from "../test-utils";
 

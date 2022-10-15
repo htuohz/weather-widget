@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
+import { fetchCurrentWeatherFromApi } from "../../api/weather";
+import { fetchCityNameByCoordsFromApi } from "../../api/city";
 
 interface ICurrentWeatherState {
   currentCity: string;
@@ -12,6 +14,7 @@ interface ICurrentWeatherState {
   humidity: number;
   pollenCount: number;
   iconId: string;
+  dailyForecast: Array<IDailyWeather>;
 }
 
 const initialState: ICurrentWeatherState = {
@@ -25,7 +28,45 @@ const initialState: ICurrentWeatherState = {
   humidity: 0,
   pollenCount: 0,
   iconId: "",
+  dailyForecast: [],
 };
+
+export interface IDailyWeather {
+  weatherName: string;
+  iconId: string;
+  maxTemprature: number;
+  minTemprature: number;
+  date: Date;
+}
+
+export const fetchCurrentCity = createAsyncThunk(
+  "currentWeather/fetchCurrentCity",
+  async (coords: { lat: number; lon: number }) => {
+    try {
+      const response = await fetchCityNameByCoordsFromApi(coords);
+      const data = await response.json();
+      return data.name;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const fetchCurrentWeather = createAsyncThunk(
+  "currentWeather/fetchCurrentWeather",
+  async (payload: {
+    coords: { lat: number; lon: number };
+    isMetric: boolean;
+  }) => {
+    try {
+      const { coords, isMetric } = payload;
+      const response = await fetchCurrentWeatherFromApi(coords, isMetric);
+      return response.json();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
 
 export const currentWeatherSlice = createSlice({
   name: "currentWeather",
@@ -35,10 +76,25 @@ export const currentWeatherSlice = createSlice({
     setCurrentCity: (state, action) => {
       state.currentCity = action.payload;
     },
-    setCurrentWeather: (state, action) => {
-      const { temp, wind_deg, wind_speed, humidity } = action.payload.current;
-      const { pop } = action.payload.hourly[0];
-      const { main, icon } = action.payload.current.weather[0];
+    setMetric: (state, action) => {
+      state.isMetric = action.payload;
+    },
+    resetCurrentWeather: (state) => {
+      state = initialState;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCurrentCity.fulfilled, (state, action) => {
+      state.currentCity = action.payload;
+    });
+    builder.addCase(fetchCurrentWeather.fulfilled, (state, action) => {
+      console.log(action.payload);
+      const { current, hourly, daily } = action.payload;
+      const { temp, wind_deg, wind_speed, humidity } = current;
+      const { pop } = hourly[0];
+      const { main, icon } = current.weather[0];
+      // const dispatch = useAppDispatch();
+      daily.pop();
       return {
         ...state,
         currentWeather: main,
@@ -47,25 +103,21 @@ export const currentWeatherSlice = createSlice({
         windDegree: wind_deg,
         windSpeed: wind_speed,
         humidity: humidity,
-        pollenCount: 0,
         iconId: icon,
+        dailyForecast: daily.map((item: any) => ({
+          weatherName: item.weather[0].main,
+          iconId: item.weather[0].icon,
+          maxTemprature: item.temp.max,
+          minTemprature: item.temp.min,
+          date: new Date(item.dt * 1000),
+        })),
       };
-    },
-    setMetric: (state, action) => {
-      state.isMetric = action.payload;
-    },
-    resetCurrentWeather: (state) => {
-      state = initialState;
-    },
+    });
   },
 });
 
-export const {
-  setCurrentCity,
-  setCurrentWeather,
-  setMetric,
-  resetCurrentWeather,
-} = currentWeatherSlice.actions;
+export const { setCurrentCity, setMetric, resetCurrentWeather } =
+  currentWeatherSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCurrentWeather = (state: RootState) => state.currentWeather;
