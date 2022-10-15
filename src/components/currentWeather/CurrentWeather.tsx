@@ -23,6 +23,8 @@ export default function CurrentWeather() {
     useAppSelector(selectCurrentWeather);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useAppDispatch();
+
+  //using Hobart's geoloaction as a default value
   const [currentCoords, setCurrentCoords] = useState({
     lat: -42.880554,
     lon: 147.324997,

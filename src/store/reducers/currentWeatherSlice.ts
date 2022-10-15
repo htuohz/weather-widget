@@ -44,8 +44,7 @@ export const fetchCurrentCity = createAsyncThunk(
   async (coords: { lat: number; lon: number }) => {
     try {
       const response = await fetchCityNameByCoordsFromApi(coords);
-      const data = await response.json();
-      return data.name;
+      return response.json();
     } catch (e) {
       console.log(e);
     }
@@ -85,7 +84,7 @@ export const currentWeatherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCurrentCity.fulfilled, (state, action) => {
-      state.currentCity = action.payload;
+      state.currentCity = action.payload[0].name;
     });
     builder.addCase(fetchCurrentWeather.fulfilled, (state, action) => {
       console.log(action.payload);
