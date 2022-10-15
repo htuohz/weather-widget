@@ -7,3 +7,10 @@
 ## Test
 
 ### `yarn test`
+
+## Main technical stacks used for the project
+
+- React
+- Typescript
+- React testing libarary
+- Redux Toolkit
