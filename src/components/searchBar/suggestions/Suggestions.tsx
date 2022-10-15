@@ -41,16 +41,13 @@ export default function Suggestions({
 const StyledWrapper = styled.div`
   display: block;
   position: absolute;
-  top: 25px;
+  top: 40px;
   left: 0;
   margin: 0;
   list-style: none;
   width: 100%;
   background-color: #fff;
-  border: 1px solid rgba(72, 72, 74, 0.33);
-  border-top: none;
-  border-bottom-left-radius: 4pt;
-  border-bottom-right-radius: 4pt;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   max-height: 250px;
   overflow: auto;
   z-index: 1001;

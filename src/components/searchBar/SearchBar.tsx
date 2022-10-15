@@ -12,6 +12,7 @@ export default function SearchBar() {
   const citySuggestions = useAppSelector(selectCitySuggestions);
   const dispatch = useAppDispatch();
   const [term, setTerm] = useState("");
+  //debounce the function to reduce the amount of request
   const delayedQuery = _.debounce((q) => getSuggestions(q), 500);
   const [suggestionsVisible, setSuggestionsVisible] = useState(false);
   const handleChange = (event: any) => {
@@ -55,4 +56,10 @@ const SearchBarWrapper = styled.div`
   position: relative;
   width: fit-content;
   padding: 5px;
+  align-items: center;
+  input {
+    border: none;
+    border-radius: 10px;
+    height: 32px;
+  }
 `;

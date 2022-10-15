@@ -26,6 +26,7 @@ const Container = styled.div`
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #f5f5f5;
 `;
 
 export default App;
